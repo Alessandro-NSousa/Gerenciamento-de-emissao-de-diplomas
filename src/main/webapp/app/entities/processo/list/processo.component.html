@@ -1,0 +1,152 @@
+<div>
+  <h2 id="page-heading" data-cy="ProcessoHeading">
+    <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.title">Processos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-processo"
+        [routerLink]="['/processo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.createLabel"> Criar novo Processo </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="processos?.length === 0">
+    <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.notFound">Nenhum Processo encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="processos && processos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="statusProcesso">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusProcesso">Status Processo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="matricula">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.matricula">Matricula</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nome">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.nome">Nome</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="data">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.data">Data</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeroDaDefesa">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroDaDefesa">Numero Da Defesa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="statusSigaa">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusSigaa">Status Sigaa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeroSipac">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroSipac">Numero Sipac</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="enviadoBiblioteca">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.enviadoBiblioteca">Enviado Biblioteca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="turma.ano">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.turma">Turma</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let processo of processos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/processo', processo.id, 'view']">{{ processo.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.StatusProcesso.' + processo.statusProcesso }}">
+            {{ processo.statusProcesso }}
+          </td>
+          <td>{{ processo.matricula }}</td>
+          <td>{{ processo.nome }}</td>
+          <td>{{ processo.data | formatMediumDate }}</td>
+          <td>{{ processo.numeroDaDefesa }}</td>
+          <td jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.Status.' + processo.statusSigaa }}">{{ processo.statusSigaa }}</td>
+          <td>{{ processo.numeroSipac }}</td>
+          <td jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.Enviado.' + processo.enviadoBiblioteca }}">
+            {{ processo.enviadoBiblioteca }}
+          </td>
+          <td>
+            <div *ngIf="processo.turma">
+              <a [routerLink]="['/turma', processo.turma.id, 'view']">{{ processo.turma.ano }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/processo', processo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/processo', processo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(processo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

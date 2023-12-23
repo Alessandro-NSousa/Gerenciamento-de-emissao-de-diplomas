@@ -1,0 +1,32 @@
+{
+  "sistemaDeEmissaoDeDiplomaApp": {
+    "processo": {
+      "home": {
+        "title": "Processos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Processo",
+        "createOrEditLabel": "Criar ou editar Processo",
+        "notFound": "Nenhum Processo encontrado"
+      },
+      "created": "Um novo Processo foi criado com o identificador {{ param }}",
+      "updated": "Um Processo foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Processo foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Processo {{ id }}?"
+      },
+      "detail": {
+        "title": "Processo"
+      },
+      "id": "ID",
+      "statusProcesso": "Status Processo",
+      "matricula": "Matricula",
+      "nome": "Nome",
+      "data": "Data",
+      "numeroDaDefesa": "Numero Da Defesa",
+      "statusSigaa": "Status Sigaa",
+      "numeroSipac": "Numero Sipac",
+      "enviadoBiblioteca": "Enviado Biblioteca",
+      "turma": "Turma"
+    }
+  }
+}

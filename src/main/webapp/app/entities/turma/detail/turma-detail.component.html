@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="turma">
+      <h2 data-cy="turmaDetailsHeading"><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.detail.title">Turma</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ turma.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.curso">Curso</span></dt>
+        <dd>
+          <span>{{ turma.curso }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.sigla">Sigla</span></dt>
+        <dd>
+          <span>{{ turma.sigla }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.ano">Ano</span></dt>
+        <dd>
+          <span>{{ turma.ano }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/turma', turma.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

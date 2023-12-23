@@ -1,0 +1,13 @@
+export enum Status {
+  ATIVO = 'ATIVO',
+
+  FORMANDO = 'FORMANDO',
+
+  TRANCADO = 'TRANCADO',
+
+  GRADUANDO = 'GRADUANDO',
+
+  CONCLUIDO = 'CONCLUIDO',
+
+  EXCLUIDO = 'EXCLUIDO',
+}

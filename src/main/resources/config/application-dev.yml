@@ -1,17 +1,17 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Configuração do Spring Boot para o perfil "dev".
 #
-# This configuration overrides the application.yml file.
+# Esta configuração substitui o arquivo application.yml.
 #
-# More information on profiles: https://www.jhipster.tech/profiles/
-# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
-# ===================================================================
+# Mais informações sobre perfis: https://www.jhipster.tech/profiles/
+# Mais informações sobre propriedades de configuração: https://www.jhipster.tech/common-application-properties/
+# ================================================ ==================
 
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
+# ================================================ ==================
+# Propriedades padrão do Spring Boot.
+# A referência completa está disponível em:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
+# ================================================ ==================
 
 logging:
   level:

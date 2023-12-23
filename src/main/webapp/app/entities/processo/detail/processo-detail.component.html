@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="processo">
+      <h2 data-cy="processoDetailsHeading"><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.detail.title">Processo</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ processo.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusProcesso">Status Processo</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.StatusProcesso.' + processo.statusProcesso }}">{{
+            processo.statusProcesso
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.matricula">Matricula</span></dt>
+        <dd>
+          <span>{{ processo.matricula }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.nome">Nome</span></dt>
+        <dd>
+          <span>{{ processo.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.data">Data</span></dt>
+        <dd>
+          <span>{{ processo.data | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroDaDefesa">Numero Da Defesa</span></dt>
+        <dd>
+          <span>{{ processo.numeroDaDefesa }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusSigaa">Status Sigaa</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.Status.' + processo.statusSigaa }}">{{ processo.statusSigaa }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroSipac">Numero Sipac</span></dt>
+        <dd>
+          <span>{{ processo.numeroSipac }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.enviadoBiblioteca">Enviado Biblioteca</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'sistemaDeEmissaoDeDiplomaApp.Enviado.' + processo.enviadoBiblioteca }}">{{
+            processo.enviadoBiblioteca
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.turma">Turma</span></dt>
+        <dd>
+          <div *ngIf="processo.turma">
+            <a [routerLink]="['/turma', processo.turma.id, 'view']">{{ processo.turma.ano }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/processo', processo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

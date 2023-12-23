@@ -1,0 +1,59 @@
+{
+  "applications": "*",
+  "changelogDate": "20231223030645",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "processo",
+  "fields": [
+    {
+      "fieldName": "statusProcesso",
+      "fieldType": "StatusProcesso",
+      "fieldValues": "PENDENTE,CONCLUIDO"
+    },
+    {
+      "fieldName": "matricula",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "data",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "numeroDaDefesa",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "statusSigaa",
+      "fieldType": "Status",
+      "fieldValues": "ATIVO,FORMANDO,TRANCADO,GRADUANDO,CONCLUIDO,EXCLUIDO"
+    },
+    {
+      "fieldName": "numeroSipac",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enviadoBiblioteca",
+      "fieldType": "Enviado",
+      "fieldValues": "SIM,NAO"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Processo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "ano",
+      "otherEntityName": "turma",
+      "relationshipName": "turma",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

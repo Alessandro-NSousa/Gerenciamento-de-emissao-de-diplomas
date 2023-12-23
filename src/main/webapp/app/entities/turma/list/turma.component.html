@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="TurmaHeading">
+    <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.home.title">Turmas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-turma"
+        [routerLink]="['/turma/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.home.createLabel"> Criar novo Turma </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="turmas?.length === 0">
+    <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.home.notFound">Nenhum Turma encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="turmas && turmas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="curso">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.curso">Curso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sigla">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.sigla">Sigla</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ano">
+            <div class="d-flex">
+              <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.turma.ano">Ano</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let turma of turmas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/turma', turma.id, 'view']">{{ turma.id }}</a>
+          </td>
+          <td>{{ turma.curso }}</td>
+          <td>{{ turma.sigla }}</td>
+          <td>{{ turma.ano }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/turma', turma.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/turma', turma.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(turma)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

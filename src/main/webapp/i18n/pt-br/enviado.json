@@ -1,0 +1,9 @@
+{
+  "sistemaDeEmissaoDeDiplomaApp": {
+    "Enviado": {
+      "null": "",
+      "SIM": "SIM",
+      "NAO": "NAO"
+    }
+  }
+}

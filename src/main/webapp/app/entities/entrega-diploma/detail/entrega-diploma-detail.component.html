@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="entregaDiploma">
+      <h2 data-cy="entregaDiplomaDetailsHeading">
+        <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.entregaDiploma.detail.title">Entrega Diploma</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ entregaDiploma.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.entregaDiploma.dataDeEntrega">Data De Entrega</span></dt>
+        <dd>
+          <span>{{ entregaDiploma.dataDeEntrega | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.entregaDiploma.observacoes">Observacoes</span></dt>
+        <dd>
+          <span>{{ entregaDiploma.observacoes }}</span>
+        </dd>
+        <dt><span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.entregaDiploma.processo">Processo</span></dt>
+        <dd>
+          <div *ngIf="entregaDiploma.processo">
+            <a [routerLink]="['/processo', entregaDiploma.processo.id, 'view']">{{ entregaDiploma.processo.nome }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/entrega-diploma', entregaDiploma.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

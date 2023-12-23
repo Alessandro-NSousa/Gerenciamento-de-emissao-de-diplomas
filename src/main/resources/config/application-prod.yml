@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/sistemaDeEmissaoDeDiploma
-    username: sistemaDeEmissaoDeDiploma
-    password:
+    url: jdbc:postgresql://localhost:5432/dev_missao_diploma
+    username: postgres
+    password: 9519
     hikari:
       poolName: Hikari
       auto-commit: false

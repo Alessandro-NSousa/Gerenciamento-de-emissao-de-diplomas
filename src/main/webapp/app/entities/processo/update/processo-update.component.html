@@ -1,0 +1,158 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-processo-heading"
+        data-cy="ProcessoCreateUpdateHeading"
+        jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.createOrEditLabel"
+      >
+        Criar ou editar Processo
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusProcesso" for="field_statusProcesso"
+            >Status Processo</label
+          >
+          <select
+            class="form-control"
+            name="statusProcesso"
+            formControlName="statusProcesso"
+            id="field_statusProcesso"
+            data-cy="statusProcesso"
+          >
+            <option [ngValue]="null">{{ 'sistemaDeEmissaoDeDiplomaApp.StatusProcesso.null' | translate }}</option>
+            <option *ngFor="let statusProcesso of statusProcessoValues" [value]="statusProcesso">
+              {{ 'sistemaDeEmissaoDeDiplomaApp.StatusProcesso.' + statusProcesso | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.matricula" for="field_matricula">Matricula</label>
+          <input type="text" class="form-control" name="matricula" id="field_matricula" data-cy="matricula" formControlName="matricula" />
+          <div *ngIf="editForm.get('matricula')!.invalid && (editForm.get('matricula')!.dirty || editForm.get('matricula')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('matricula')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              O campo é obrigatório.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.nome" for="field_nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.data" for="field_data">Data</label>
+          <div class="input-group">
+            <input
+              id="field_data"
+              data-cy="data"
+              type="text"
+              class="form-control"
+              name="data"
+              ngbDatepicker
+              #dataDp="ngbDatepicker"
+              formControlName="data"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroDaDefesa" for="field_numeroDaDefesa"
+            >Numero Da Defesa</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroDaDefesa"
+            id="field_numeroDaDefesa"
+            data-cy="numeroDaDefesa"
+            formControlName="numeroDaDefesa"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.statusSigaa" for="field_statusSigaa"
+            >Status Sigaa</label
+          >
+          <select class="form-control" name="statusSigaa" formControlName="statusSigaa" id="field_statusSigaa" data-cy="statusSigaa">
+            <option [ngValue]="null">{{ 'sistemaDeEmissaoDeDiplomaApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">
+              {{ 'sistemaDeEmissaoDeDiplomaApp.Status.' + status | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.numeroSipac" for="field_numeroSipac"
+            >Numero Sipac</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroSipac"
+            id="field_numeroSipac"
+            data-cy="numeroSipac"
+            formControlName="numeroSipac"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.enviadoBiblioteca" for="field_enviadoBiblioteca"
+            >Enviado Biblioteca</label
+          >
+          <select
+            class="form-control"
+            name="enviadoBiblioteca"
+            formControlName="enviadoBiblioteca"
+            id="field_enviadoBiblioteca"
+            data-cy="enviadoBiblioteca"
+          >
+            <option [ngValue]="null">{{ 'sistemaDeEmissaoDeDiplomaApp.Enviado.null' | translate }}</option>
+            <option *ngFor="let enviado of enviadoValues" [value]="enviado">
+              {{ 'sistemaDeEmissaoDeDiplomaApp.Enviado.' + enviado | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.turma" for="field_turma">Turma</label>
+          <select class="form-control" id="field_turma" data-cy="turma" name="turma" formControlName="turma" [compareWith]="compareTurma">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="turmaOption" *ngFor="let turmaOption of turmasSharedCollection">{{ turmaOption.ano }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

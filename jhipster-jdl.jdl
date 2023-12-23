@@ -1,0 +1,43 @@
+
+entity Processo {
+	statusProcesso StatusProcesso
+	matricula String required unique
+    nome String 
+    data LocalDate
+    numeroDaDefesa String
+    statusSigaa Status
+    numeroSipac String
+    enviadoBiblioteca Enviado
+    
+}
+
+entity Turma {
+	curso String
+    sigla String
+    ano String
+}
+
+enum StatusProcesso{
+	PENDENTE, CONCLUIDO
+}
+
+entity EntregaDiploma {
+	dataDeEntrega LocalDate
+    observacoes TextBlob
+}
+
+enum Enviado {
+	SIM, NAO
+}
+
+
+enum Status {
+	ATIVO, FORMANDO, TRANCADO, GRADUANDO, CONCLUIDO, EXCLUIDO
+}
+
+
+relationship ManyToOne {
+	Processo{turma(ano)} to Turma
+    //Processo{EntregaDiploma(dataDeEntrega)} to EntregaDiploma
+    EntregaDiploma{Processo(nome)} to Processo
+}

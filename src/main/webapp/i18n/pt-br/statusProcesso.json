@@ -1,0 +1,9 @@
+{
+  "sistemaDeEmissaoDeDiplomaApp": {
+    "StatusProcesso": {
+      "null": "",
+      "PENDENTE": "PENDENTE",
+      "CONCLUIDO": "CONCLUIDO"
+    }
+  }
+}
