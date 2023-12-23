@@ -1,0 +1,1 @@
+org.springframework.test.context.ContextCustomizerFactory = com.ufpa.diploma.emissao.config.TestContainersSpringContextCustomizerFactory
