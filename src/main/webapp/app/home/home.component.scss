@@ -4,10 +4,16 @@ Main page styles
 
 .hipster {
   display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
+  //width: 347px;
+  //height: 497px;
+  background: url('../../content/images/ufpa-castanhal.jpg') no-repeat center top;
   background-size: contain;
+}
+
+.bg-img {
+  background-image: url('../../content/images/ufpa-castanhal.jpg');
+  background-position: center; //alterar
+  background-repeat: no-repeat;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -17,7 +23,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
+    background: url('../../content/images/ufpa-castanhal.jpg') no-repeat center top;
     background-size: contain;
   }
 }

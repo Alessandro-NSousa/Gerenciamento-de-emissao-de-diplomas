@@ -2,11 +2,11 @@
   "sistemaDeEmissaoDeDiplomaApp": {
     "entregaDiploma": {
       "home": {
-        "title": "Entrega Diplomas",
+        "title": "Entregas",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Entrega Diploma",
-        "createOrEditLabel": "Criar ou editar Entrega Diploma",
-        "notFound": "Nenhum Entrega Diploma encontrado"
+        "createOrEditLabel": "Cadastrar ou Alterar uma Entrega de Diploma",
+        "notFound": "Nenhuma Entrega de Diploma encontrado"
       },
       "created": "Um novo Entrega Diploma foi criado com o identificador {{ param }}",
       "updated": "Um Entrega Diploma foi atualizado com o identificador {{ param }}",

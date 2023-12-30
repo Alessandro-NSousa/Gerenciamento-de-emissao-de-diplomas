@@ -4,7 +4,7 @@
       "home": {
         "title": "Processos",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Processo",
+        "createLabel": "Cadastrar novo Processo",
         "createOrEditLabel": "Criar ou editar Processo",
         "notFound": "Nenhum Processo encontrado"
       },
@@ -18,14 +18,14 @@
         "title": "Processo"
       },
       "id": "ID",
-      "statusProcesso": "Status Processo",
-      "matricula": "Matricula",
-      "nome": "Nome",
-      "data": "Data",
-      "numeroDaDefesa": "Numero Da Defesa",
-      "statusSigaa": "Status Sigaa",
-      "numeroSipac": "Numero Sipac",
-      "enviadoBiblioteca": "Enviado Biblioteca",
+      "statusProcesso": "Status do Processo",
+      "matricula": "Matrícula",
+      "nome": "Discente",
+      "data": "Data de Cadastro",
+      "numeroDaDefesa": "Número Da Defesa",
+      "statusSigaa": "Status no Sigaa",
+      "numeroSipac": "Número do SIPAC",
+      "enviadoBiblioteca": "Enviado para Biblioteca?",
       "turma": "Turma"
     }
   }

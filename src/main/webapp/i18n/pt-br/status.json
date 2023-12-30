@@ -2,12 +2,12 @@
   "sistemaDeEmissaoDeDiplomaApp": {
     "Status": {
       "null": "",
-      "ATIVO": "ATIVO",
-      "FORMANDO": "FORMANDO",
-      "TRANCADO": "TRANCADO",
-      "GRADUANDO": "GRADUANDO",
-      "CONCLUIDO": "CONCLUIDO",
-      "EXCLUIDO": "EXCLUIDO"
+      "ATIVO": "Ativo",
+      "FORMANDO": "Formando",
+      "TRANCADO": "Trancado",
+      "GRADUANDO": "Graduando",
+      "CONCLUIDO": "Concluído",
+      "EXCLUIDO": "excluído"
     }
   }
 }
