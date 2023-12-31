@@ -133,7 +133,9 @@
           <label class="form-label" jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.turma" for="field_turma">Turma</label>
           <select class="form-control" id="field_turma" data-cy="turma" name="turma" formControlName="turma" [compareWith]="compareTurma">
             <option [ngValue]="null"></option>
-            <option [ngValue]="turmaOption" *ngFor="let turmaOption of turmasSharedCollection">{{ turmaOption.ano }}</option>
+            <option [ngValue]="turmaOption" *ngFor="let turmaOption of turmasSharedCollection">
+              {{ turmaOption.ano }} - {{ turmaOption.sigla }}
+            </option>
           </select>
         </div>
       </div>
