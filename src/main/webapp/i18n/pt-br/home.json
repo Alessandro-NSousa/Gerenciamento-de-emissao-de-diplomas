@@ -3,7 +3,7 @@
     "title": "Bem vindo",
     "subtitle": "Sistema de Emissão de Diplomas",
     "logged": {
-      "message": "Você está logado como \"{{username}}\"."
+      "message": "Olá {{username}}, Seja Bem vindo(a)."
     },
     "question": "Em caso de dúvida sobre o JHipster:",
     "link": {
