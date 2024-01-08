@@ -2,28 +2,48 @@
   <h2 id="page-heading" data-cy="ProcessoHeading">
     <span jhiTranslate="sistemaDeEmissaoDeDiplomaApp.processo.home.title">Processos</span>
 
-    <div class="row align-items-start mt-4">
+    <!-- novos filtros -->
+
+    <div class="row d-flex justify-content-around mt-4">
       <div class="col-3">
-        <h6 class="mb-3 text-monospace text-center">Buscar por Discente</h6>
-        <input class="form-control mb-3 w-100" type="text" />
+        <h6 class="mb-3 text-monospace text-center">Buscar por Dicente</h6>
+        <input
+          type="text"
+          class="form-control text-center"
+          placeholder="Digite o nome do Discente"
+          id="nomeFilter"
+          [(ngModel)]="nomeFilter"
+        />
       </div>
       <div class="col-3">
-        <h6 class="mb-3 text-monospace text-center">Buscar por Matrícula</h6>
-        <input class="form-control mb-3 w-100" type="text" />
+        <h6 class="mb-3 text-monospace text-center">Buscar Matrícula</h6>
+        <input
+          type="text"
+          class="form-control text-center"
+          id="matriculaFilter"
+          placeholder="Digite o número de Matricula"
+          [(ngModel)]="matriculaFilter"
+        />
       </div>
       <div class="col-3">
         <h6 class="mb-3 text-monospace text-center">Buscar por Turma</h6>
-        <input class="form-control mb-3 w-100" type="text" />
-      </div>
-      <div class="col-3">
-        <h6 class="mb-3 text-monospace text-center">Buscar por Status do Processo</h6>
-        <input class="form-control mb-3 w-100" type="text" />
+        <input
+          type="text"
+          placeholder="Digite o Ano da Turma"
+          class="form-control text-center"
+          id="turmaFilter"
+          [(ngModel)]="turmaFilter"
+        />
       </div>
     </div>
 
-    <div class="row justify-content-center">
-      <div class="col-3">
-        <button class="btn btn-info w-100">Pesquisar</button>
+    <div class="row justify-content-center mt-3">
+      <div class="col-3 text-center">
+        <!-- Botão de pesquisa -->
+        <button class="btn btn-primary" (click)="search()">
+          <fa-icon icon="search"></fa-icon>
+          <span>Pesquisar</span>
+        </button>
       </div>
     </div>
 

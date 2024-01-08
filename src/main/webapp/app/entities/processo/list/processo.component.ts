@@ -17,6 +17,10 @@ import { SortService } from 'app/shared/sort/sort.service';
 export class ProcessoComponent implements OnInit {
   processos?: IProcesso[];
   isLoading = false;
+  nomeFilter = '';
+  matriculaFilter = '';
+  turmaFilter = '';
+  statusProcessoFilter = '';
 
   predicate = 'id';
   ascending = true;
@@ -117,6 +121,54 @@ export class ProcessoComponent implements OnInit {
       return [];
     } else {
       return [predicate + ',' + ascendingQueryParam];
+    }
+  }
+
+  applyFilters(): void {
+    let processosFiltrados: IProcesso[] = [];
+
+    if (this.processos) {
+      processosFiltrados = this.processos;
+
+      if (this.nomeFilter) {
+        processosFiltrados = processosFiltrados.filter(processo => processo.nome?.toLowerCase().includes(this.nomeFilter.toLowerCase()));
+      }
+
+      if (this.matriculaFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.matricula?.toLowerCase().includes(this.matriculaFilter.toLowerCase())
+        );
+      }
+
+      if (this.turmaFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.turma?.ano?.toLowerCase().includes(this.turmaFilter.toLowerCase())
+        );
+      }
+
+      /*if (this.statusProcessoFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.statusProcesso === this.statusProcessoFilter
+        );
+      }*/
+    }
+
+    // Se nenhum filtro estiver ativo, restaurar a lista original de processos
+    if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
+      processosFiltrados = this.processos || [];
+      // ^ Adicionamos um 'or' para tratar o caso em que this.processos é undefined
+    }
+
+    this.processos = this.refineData(processosFiltrados);
+  }
+
+  search(): void {
+    // Aplicar os filtros quando o botão de pesquisa for clicado
+    this.applyFilters();
+
+    // Se nenhum filtro estiver preenchido, recarregar todos os dados
+    if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
+      this.load();
     }
   }
 }
