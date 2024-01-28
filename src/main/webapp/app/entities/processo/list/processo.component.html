@@ -48,7 +48,7 @@
     </div>
 
     <div class="d-flex justify-content-end mt-5">
-      <button class="btn btn-danger me-2">
+      <button class="btn btn-danger me-2" (click)="gerarPDF()">
         <fa-icon [icon]="pdf"></fa-icon>
         <span>Gerar Relatório</span>
       </button>
@@ -79,7 +79,7 @@
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="processos && processos.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table table-striped" id="tb" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col" jhiSortBy="id">
@@ -168,7 +168,7 @@
               <a [routerLink]="['/turma', processo.turma.id, 'view']">{{ processo.turma.ano }}</a>
             </div>
           </td>
-          <td class="text-end">
+          <td id="acao" class="text-end">
             <div class="btn-group">
               <button
                 type="submit"

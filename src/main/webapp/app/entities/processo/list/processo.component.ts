@@ -10,6 +10,10 @@ import { EntityArrayResponseType, ProcessoService } from '../service/processo.se
 import { ProcessoDeleteDialogComponent } from '../delete/processo-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+declare const require: any;
+const jsPDF = require('jspdf');
+require('jspdf-autotable');
+
 @Component({
   selector: 'jhi-processo',
   templateUrl: './processo.component.html',
@@ -153,22 +157,52 @@ export class ProcessoComponent implements OnInit {
       }*/
     }
 
-    // Se nenhum filtro estiver ativo, restaurar a lista original de processos
     if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
       processosFiltrados = this.processos || [];
-      // ^ Adicionamos um 'or' para tratar o caso em que this.processos é undefined
     }
 
     this.processos = this.refineData(processosFiltrados);
   }
 
   search(): void {
-    // Aplicar os filtros quando o botão de pesquisa for clicado
+    // Aplica os filtros quando o botão de pesquisa for clicado
     this.applyFilters();
 
     // Se nenhum filtro estiver preenchido, recarregar todos os dados
     if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
       this.load();
     }
+  }
+
+  /*gerarPDF() {
+    const doc = new jsPDF("landscape");
+    
+    doc.autoTable({ html: '#tb' });
+    doc.save('documento.pdf');
+  }*/
+
+  gerarPDF() {
+    const doc = new jsPDF('landscape');
+
+    // Selecione todas as linhas da tabela
+    const linhas = document.querySelectorAll('#tb tbody tr');
+
+    // Para cada linha, remova a última célula
+    linhas.forEach(linha => {
+      const ultimaCelula = linha.lastElementChild;
+      if (ultimaCelula) {
+        linha.removeChild(ultimaCelula);
+      }
+    });
+
+    // Gere o PDF
+    doc.autoTable({ html: '#tb' });
+    doc.save('documento.pdf');
+
+    // Restaure as últimas células removidas (opcional)
+    linhas.forEach(linha => {
+      const ultimaCelula = document.createElement('td');
+      linha.appendChild(ultimaCelula);
+    });
   }
 }
