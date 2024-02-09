@@ -10,6 +10,10 @@ import { EntityArrayResponseType, ProcessoService } from '../service/processo.se
 import { ProcessoDeleteDialogComponent } from '../delete/processo-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
+declare const require: any;
+const jsPDF = require('jspdf');
+require('jspdf-autotable');
+
 @Component({
   selector: 'jhi-processo',
   templateUrl: './processo.component.html',
@@ -17,6 +21,10 @@ import { SortService } from 'app/shared/sort/sort.service';
 export class ProcessoComponent implements OnInit {
   processos?: IProcesso[];
   isLoading = false;
+  nomeFilter = '';
+  matriculaFilter = '';
+  turmaFilter = '';
+  statusProcessoFilter = '';
 
   predicate = 'id';
   ascending = true;
@@ -118,5 +126,83 @@ export class ProcessoComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  applyFilters(): void {
+    let processosFiltrados: IProcesso[] = [];
+
+    if (this.processos) {
+      processosFiltrados = this.processos;
+
+      if (this.nomeFilter) {
+        processosFiltrados = processosFiltrados.filter(processo => processo.nome?.toLowerCase().includes(this.nomeFilter.toLowerCase()));
+      }
+
+      if (this.matriculaFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.matricula?.toLowerCase().includes(this.matriculaFilter.toLowerCase())
+        );
+      }
+
+      if (this.turmaFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.turma?.ano?.toLowerCase().includes(this.turmaFilter.toLowerCase())
+        );
+      }
+
+      /*if (this.statusProcessoFilter) {
+        processosFiltrados = processosFiltrados.filter(processo =>
+          processo.statusProcesso === this.statusProcessoFilter
+        );
+      }*/
+    }
+
+    if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
+      processosFiltrados = this.processos || [];
+    }
+
+    this.processos = this.refineData(processosFiltrados);
+  }
+
+  search(): void {
+    // Aplica os filtros quando o botão de pesquisa for clicado
+    this.applyFilters();
+
+    // Se nenhum filtro estiver preenchido, recarregar todos os dados
+    if (!this.nomeFilter && !this.matriculaFilter && !this.turmaFilter && !this.statusProcessoFilter) {
+      this.load();
+    }
+  }
+
+  /*gerarPDF() {
+    const doc = new jsPDF("landscape");
+    
+    doc.autoTable({ html: '#tb' });
+    doc.save('documento.pdf');
+  }*/
+
+  gerarPDF() {
+    const doc = new jsPDF('landscape');
+
+    // Selecione todas as linhas da tabela
+    const linhas = document.querySelectorAll('#tb tbody tr');
+
+    // Para cada linha, remova a última célula
+    linhas.forEach(linha => {
+      const ultimaCelula = linha.lastElementChild;
+      if (ultimaCelula) {
+        linha.removeChild(ultimaCelula);
+      }
+    });
+
+    // Gere o PDF
+    doc.autoTable({ html: '#tb' });
+    doc.save('documento.pdf');
+
+    // Restaure as últimas células removidas (opcional)
+    linhas.forEach(linha => {
+      const ultimaCelula = document.createElement('td');
+      linha.appendChild(ultimaCelula);
+    });
   }
 }

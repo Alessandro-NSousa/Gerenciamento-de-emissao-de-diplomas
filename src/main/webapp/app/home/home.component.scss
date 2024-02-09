@@ -6,8 +6,25 @@ Main page styles
   display: inline-block;
   //width: 347px;
   //height: 497px;
-  background: url('../../content/images/ufpa-castanhal.jpg') no-repeat center top;
+  background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
   background-size: contain;
+}
+
+.bg-blue {
+  background-color: #080c84;
+  //opacity: 90%;
+}
+.altura {
+  height: 1000px;
+}
+.small-alert {
+  padding: 5px;
+  text-align: center;
+}
+
+.text-color {
+  color: whitesmoke;
+  font-weight: bold;
 }
 
 .bg-img {
